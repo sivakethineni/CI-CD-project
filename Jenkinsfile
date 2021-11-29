@@ -10,6 +10,7 @@ node{
     }
     
    stage('Build Docker Image'){
+     sh 'ls'
      sh 'docker build -t vevadevops/vproappfix:$BUILD_ID Docker-app/Dockerfile'
      sh 'docker tag vevadevops/vproappfix:$BUILD_ID vevadevops/vproappfix:latest'
    }
