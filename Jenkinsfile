@@ -20,4 +20,5 @@ node{
    withDockerRegistry(credentialsId: 'cba64e86-2f4e-4621-ae44-51ecb1a65982', url: 'https://hub.docker.com/') {
     sh 'docker push vevadevops/vproappfix'
    }
-}
+ }
+}   
