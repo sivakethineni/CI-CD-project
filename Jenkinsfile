@@ -25,7 +25,7 @@ node{
      script {
      def dockerRun = 'docker run -p 8080:8080 -d --name vproapp vevadevops/vproappfix'
    sshagent(['30220e43-1726-4c6c-bc5c-2715813b09d7']) {
-      sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 docker rm -f ${docker ps -aq}"
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 docker rm -f ${docker ps -aq}"
     sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 ls"
     sh "scp -o StrictHostKeyChecking=no compose/* ubuntu@172.31.9.204:/home/ubuntu"
     sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 cd /home/ubuntu"
