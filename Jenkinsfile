@@ -18,7 +18,7 @@ node{
    
   stage('Build Docker Image'){ 
    withCredentials([string(credentialsId: 'docker-hub-pwd', variable: 'docker-hub-pwd')]) {
-     sh "docker login -u vevadevops -p ${docker-hub-pwd}"
+     sh 'docker login -u vevadevops -p ${docker-hub-pwd}'
    }
     sh 'docker push vevadevops/vproappfix'
   } 
