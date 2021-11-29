@@ -16,5 +16,10 @@ node{
      sh 'docker tag vevadevops/vproappfix:$BUILD_ID vevadevops/vproappfix:latest'
    }
    
-  
+  stage('Build Docker Image'){ 
+   withCredentials([string(credentialsId: 'docker-hub-pwd', variable: 'docker-hub-pwd')]) {
+     sh "docker login -u vevadevops -p ${dockerHubPwd}"
+   }
+    sh 'docker push vevadevops/vproappfix'
+  } 
 }
