@@ -21,4 +21,10 @@ node{
     sh 'docker push vevadevops/vproappfix'
    }
  }
-}   
+  stage('Build Docker Image'){ 
+     def dockerRun = 'docker run -p 8080:8080 -d --name vproapp vevadevops/vproappfix'
+   sshagent(['30220e43-1726-4c6c-bc5c-2715813b09d7']) {
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 ${dockerRun}"
+    }
+  }   
+}
