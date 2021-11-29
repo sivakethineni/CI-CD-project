@@ -17,7 +17,7 @@ node{
    }
    
   stage('Build Docker Image'){ 
-   withDockerRegistry(credentialsId: 'cba64e86-2f4e-4621-ae44-51ecb1a65982', url: 'https://hub.docker.com/') {
+   withDockerRegistry(credentialsId: 'cba64e86-2f4e-4621-ae44-51ecb1a65982', url: 'https://index.docker.io/v1/') {
     sh 'docker push vevadevops/vproappfix'
    }
  }
