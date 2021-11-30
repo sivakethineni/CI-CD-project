@@ -21,7 +21,7 @@ node{
     sh 'docker push vevadevops/vproappfix'
    }
  }
-  stage('Build Docker Image'){
+  stage('Deploy Docker Container into Docker Dev Server'){
      script {
      def dockerRun = 'docker run -p 8080:8080 -d --name vproapp vevadevops/vproappfix'
    sshagent(['30220e43-1726-4c6c-bc5c-2715813b09d7']) {
