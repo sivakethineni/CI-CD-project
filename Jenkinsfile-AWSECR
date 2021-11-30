@@ -13,7 +13,7 @@ node{
      sh 'mkdir -p Docker-app/target'
      sh 'cp target/vprofile-v2.war Docker-app/target/'
      sh 'docker build -t 875472717535.dkr.ecr.us-east-2.amazonaws.com/vproappfix:$BUILD_ID Docker-app/'
-     sh 'docker tag 875472717535.dkr.ecr.us-east-2.amazonaws.com/vproappfix:$BUILD_ID vevadevops/vproappfix:latest'
+     sh 'docker tag 875472717535.dkr.ecr.us-east-2.amazonaws.com/vproappfix:$BUILD_ID 875472717535.dkr.ecr.us-east-2.amazonaws.com/vproappfix:latest'
    }
    
    stage('Push Docker Image'){
