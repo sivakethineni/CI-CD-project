@@ -28,7 +28,7 @@ node{
     
     sh "scp -o StrictHostKeyChecking=no compose/* ubuntu@172.31.9.204:/home/ubuntu"
     sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 cd /home/ubuntu"
-    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 ${dockerRun}"
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 docker-compose up -d"
     }
      }
   }   
