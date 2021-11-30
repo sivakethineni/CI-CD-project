@@ -13,12 +13,12 @@ node{
      sh 'mkdir -p Docker-app/target'
      sh 'cp target/vprofile-v2.war Docker-app/target/'
      sh 'docker build -t vproappfix Docker-app/'
-     sh 'docker tag vproappfix:latest 875472717535.dkr.ecr.us-east-2.amazonaws.com/vproappfix:latest'
+     sh 'docker tag vproappfix:latest 875472717535.dkr.ecr.ap-south-1.amazonaws.com/vproappfix:latest'
    }
    
    stage('Push Docker Image'){
-     sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 875472717535.dkr.ecr.us-east-2.amazonaws.com'
-     sh 'docker push 875472717535.dkr.ecr.us-east-2.amazonaws.com/vproappfix:latest'
+     sh 'aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 875472717535.dkr.ecr.ap-south-1.amazonaws.com'
+     sh 'docker push 875472717535.dkr.ecr.ap-south-1.amazonaws.com/vproappfix:latest'
    }
  
     
