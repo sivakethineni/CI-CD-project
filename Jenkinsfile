@@ -16,7 +16,7 @@ node{
      sh 'docker tag vevadevops/vproappfix:$BUILD_ID vevadevops/vproappfix:latest'
    }
    
-  stage('Build Docker Image'){ 
+  stage('Push Docker Image'){ 
    withDockerRegistry(credentialsId: 'cba64e86-2f4e-4621-ae44-51ecb1a65982', url: 'https://index.docker.io/v1/') {
     sh 'docker push vevadevops/vproappfix'
    }
@@ -25,10 +25,10 @@ node{
      script {
      def dockerRun = 'docker run -p 8080:8080 -d --name vproapp vevadevops/vproappfix'
    sshagent(['30220e43-1726-4c6c-bc5c-2715813b09d7']) {
-    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 docker rm -f vproapp vprodb vpronginx"
+    #sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 docker rm -f vproapp vprodb vpronginx"
     sh "scp -o StrictHostKeyChecking=no compose/* ubuntu@172.31.9.204:/home/ubuntu"
     sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 cd /home/ubuntu"
-    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 docker-compose up -d"
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.9.204 ${dockerRun}"
     }
      }
   }   
