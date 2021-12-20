@@ -1,0 +1,13 @@
+# Vprofile app service
+apiVersion: v1
+kind: Service
+metadata:
+  name: vproapp
+spec:
+  ports:
+  - port: 80
+    targetPort: vproapp-port
+    protocol: TCP
+  selector:
+    app: vproapp
+  type: NodePort
