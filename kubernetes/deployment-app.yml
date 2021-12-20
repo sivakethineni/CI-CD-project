@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vproapp
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: vproapp
+  template:
+    metadata:
+      name: vproapp
+      labels:
+        app: vproapp
+    spec:
+      containers:
+      - name: vproapp
+        image: vevadevops/vproappfix
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vproapp
+spec:
+  type: NodePort
+  selector:
+    app: vproapp
+  ports:
+  - port: 80
+    targetPort: 8080
