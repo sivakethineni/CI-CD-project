@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vprodb
+  labels:
+    app: vprodb
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: vprodb
+  template:
+    metadata:
+      name: vprodb
+      labels:
+        app: vprodb
+    spec:
+      containers:
+      - name: vprofiledbcontainer
+        image: vevadevops/vprodbfix
+        ports:
+        - name: vprodb-port
+          containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "vprodbpass"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vprodb
+spec:
+  type: ClusterIP
+  selector:
+    app: vprodb
+  ports:
+  - port: 3306
+    targetPort: 3306
