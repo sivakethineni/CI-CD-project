@@ -1,38 +1,17 @@
 #!/usr/bin/env groovy
 
-library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
-    [$class: 'GitSCMSource',
-     remote: 'https://gitlab.com/nanuchi/jenkins-shared-library.git',
-     credentialsId: 'gitlab-credentials'
-    ]
-)
-
 pipeline {
     agent any
-    tools {
-        maven 'Maven'
-    }
-    environment {
-        IMAGE_NAME = 'nanajanashia/demo-app:java-maven-2.0'
-    }
+    
     stages {
         stage('build app') {
-            steps {
-               script {
-                  echo 'building application jar...'
-                  buildJar()
-               }
-            }
+           sh 'mvn install'
         }
         stage('build image') {
-            steps {
-                script {
-                   echo 'building docker image...'
-                   buildImage(env.IMAGE_NAME)
-                   dockerLogin()
-                   dockerPush(env.IMAGE_NAME)
-                }
-            }
+            sh 'mkdir -p Docker-app/target'
+            sh 'cp target/vprofile-v2.war Docker-app/target/'
+            sh 'docker build -t vevadevops/vproappfix:$BUILD_ID Docker-app/'
+            sh 'docker tag vevadevops/vproappfix:$BUILD_ID vevadevops/vproappfix:latest'
         }
         stage('provision server') {
             environment {
