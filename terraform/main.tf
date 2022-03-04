@@ -3,12 +3,12 @@ provider "aws" {
 }
 
 resource "aws_instance" "Docker-Server" {
-    ami = "ami-0a74bfeb190bd404f" 
+    ami = "ami-08ee6644906ff4d6c" 
     instance_type = "t2.micro" 
-    key_name = "ProvokeTrainings"
-    security_groups = ["launch-wizard-19"] 
+    key_name = "Jenkins-new-key"
+    security_groups = ["All-Traffic-SG"] 
     tags = {
-        Name = "Terraform Server by Provoke IT Trainings"
+        Name = "Docker Server by Terraform"
     }
 }
 
