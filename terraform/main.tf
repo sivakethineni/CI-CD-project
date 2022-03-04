@@ -24,9 +24,6 @@ data "aws_ami" "latest-amazon-linux-image" {
     }
 }
 
-output "ami_id" {
-  value = data.aws_ami.amazon-linux-image.id
-}
 
 resource "aws_instance" "Docker-Server" {
     ami = data.aws_ami.latest-amazon-linux-image.id
