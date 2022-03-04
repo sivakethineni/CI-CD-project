@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "Docker-Server" {
-    ami = "ami-08ee6644906ff4d6c" 
+    ami = "ami-076754bea03bde973" 
     instance_type = "t2.micro" 
     key_name = "Jenkins-new-key"
     security_groups = ["All-Traffic-SG"]
