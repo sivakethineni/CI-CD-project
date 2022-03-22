@@ -17,18 +17,18 @@ node{
    }
    
   stage('Push Docker Image'){ 
-   withDockerRegistry(credentialsId: '0dec593c-7558-435c-ae85-d1bdbc52ae5c', url: 'https://index.docker.io/v1/') {
+   withDockerRegistry(credentialsId: 'docker-hub-pwd', url: 'https://index.docker.io/v1/') {
     sh 'docker push vevadevops/vproappfix'
    }
  }
   stage('Deploy Docker Container into Docker Dev Server'){
      script {
      def dockerRun = 'docker run -p 8080:8080 -d --name vproapp vevadevops/vproappfix'
-   sshagent(['6172a63c-faee-4a88-afd8-e58d72f25b1b']) {
+   sshagent(['docker-server-pwd']) {
     
-    sh "scp -o StrictHostKeyChecking=no compose/* ubuntu@172.31.39.109:/home/ubuntu"
-    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.39.109 cd /home/ubuntu"
-    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.39.109 docker-compose up -d"
+    sh "scp -o StrictHostKeyChecking=no compose/* ubuntu@172.31.3.118:/home/ubuntu"
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.3.118 cd /home/ubuntu"
+    sh "ssh -o StrictHostKeyChecking=no ubuntu@172.31.3.118 docker-compose up -d"
     }
      }
   }   
